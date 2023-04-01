@@ -41,7 +41,7 @@ Este script de Python verifica si una página web está en línea y, si no lo es
 - INTERVAL = 10 (cada cuantos minutos se ejecuta el script, en este caso 10, cambiar a gusto)
 
 
-2. Crear dos archivos excel con los websites y los mails a informar respectivamente e indicar la ruta de los mismos, luego indicar la ruta.
+2. Crear dos archivos en excel con los websites y los mails a informar respectivamente e indicar la ruta de los mismos, luego indicar la ruta.
 ```
 dfwebsites = pd.read_excel("C:\\ejemplo\\websites.xlsx")
 dfemails = pd.read_excel("C:\\ejemplo\\emails.xlsx")
