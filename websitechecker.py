@@ -1,4 +1,5 @@
 import requests
+from requests.exceptions import ReadTimeout
 import schedule
 import time
 import datetime
@@ -10,21 +11,22 @@ from email.mime.text import MIMEText
 # Configuración del correo electrónico
 FROM_EMAIL = 'tucorreo@gmail.com'
 FROM_PASSWORD = 'contraseña de aplicación otorgada por Google'
-INTERVAL = 10 # Cada cuantos minutos ejecuta el checkeo de las web
+INTERVAL = 15 # Cada cuantos minutos ejecuta el checkeo de las webs
 
 # Carga el archivo Excel
 dfwebsites = pd.read_excel("C:\\ejemplo\\websites.xlsx")
 dfemails = pd.read_excel("C:\\ejemplo\\emails.xlsx")
 
-# Defino la función para revisar la disponibilidad del sitio web
+# Define la función para revisar la disponibilidad del sitio web
 def check_website(url):
     try:
-        response = requests.get(url, timeout=5)
+        response = requests.get(url, timeout=30)
         if response.status_code == 200:
             return True
         else:
             return False
-    except:
+    except (requests.exceptions.Timeout, ReadTimeout):
+        print("TIMEOUT DE " + url)
         return False
  
 # Defino la función para enviar correos electrónicos
